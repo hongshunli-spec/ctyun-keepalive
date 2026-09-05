@@ -1,0 +1,41 @@
+name: 天翼云电脑防休眠保活
+
+on:
+  schedule:
+    # 每小时的0分和50分各跑一次（最大间隔50分钟，小于1小时休眠阈值）
+    - cron: '0,50 * * * *'
+  workflow_dispatch:  # 支持手动触发
+
+jobs:
+  keepalive:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 安装依赖
+        run: npm install
+
+      - name: 安装 Playwright 浏览器
+        run: npx playwright install --with-deps chromium
+
+      - name: 运行天翼云保活脚本
+        env:
+          CTYUN_ACCOUNT: ${{ secrets.CTYUN_ACCOUNT }}
+          CTYUN_PASSWORD: ${{ secrets.CTYUN_PASSWORD }}
+        run: node keepalive.js
+
+      - name: 上传错误截图（如果有）
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: error-screenshot
+          path: error_screenshot.png
+          if-no-files-found: ignore

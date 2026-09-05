@@ -1,0 +1,12 @@
+{
+  "name": "ctyun-keepalive-cloud",
+  "version": "1.0.0",
+  "description": "天翼云电脑云端防休眠保活脚本 (GitHub Actions + Playwright)",
+  "main": "keepalive.js",
+  "scripts": {
+    "start": "node keepalive.js"
+  },
+  "dependencies": {
+    "playwright": "^1.48.0"
+  }
+}
