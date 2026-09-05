@@ -1,0 +1,8 @@
+﻿2026-09-05T05:40:48.3722575Z ##[group]Run npm install
+2026-09-05T05:40:48.3722956Z [36;1mnpm install[0m
+2026-09-05T05:40:48.3765820Z shell: /usr/bin/bash -e {0}
+2026-09-05T05:40:48.3766351Z ##[endgroup]
+2026-09-05T05:40:48.9146770Z 
+2026-09-05T05:40:48.9155411Z up to date, audited 7 packages in 462ms
+2026-09-05T05:40:48.9156652Z 
+2026-09-05T05:40:48.9156989Z found 0 vulnerabilities

@@ -1,0 +1,6 @@
+node_modules/
+*.log
+error_screenshot.png
+set_secrets.js
+logs/
+logs*.zip

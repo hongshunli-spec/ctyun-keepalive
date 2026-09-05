@@ -1,0 +1,6 @@
+﻿2026-09-05T05:40:48.9243976Z ##[group]Run npx playwright install --with-deps chromium
+2026-09-05T05:40:48.9244493Z [36;1mnpx playwright install --with-deps chromium[0m
+2026-09-05T05:40:48.9286601Z shell: /usr/bin/bash -e {0}
+2026-09-05T05:40:48.9286899Z ##[endgroup]
+2026-09-05T05:40:49.2606347Z sh: 1: playwright: Permission denied
+2026-09-05T05:40:49.2692815Z ##[error]Process completed with exit code 127.
