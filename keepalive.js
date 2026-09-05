@@ -62,8 +62,9 @@ async function simulateActivity(page) {
     const page = await context.newPage();
 
     log('打开天翼云电脑页面...');
-    await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
-    await page.waitForTimeout(3000);
+    // 海外访问国内网站可能较慢，增加超时到120秒，用commit策略（只要收到响应头就继续）
+    await page.goto(URL, { waitUntil: 'commit', timeout: 120000 });
+    await page.waitForTimeout(8000);
 
     // 检测是否需要登录
     const hasForm = await page.locator('input[placeholder*="手机号"]').count();
@@ -109,8 +110,8 @@ async function simulateActivity(page) {
     }
 
     // 重新进入主页
-    await page.goto(URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
-    await page.waitForTimeout(4000);
+    await page.goto(URL, { waitUntil: 'commit', timeout: 120000 });
+    await page.waitForTimeout(8000);
 
     // 点击进入AI云电脑
     const enterBtn = page.locator('text=进入AI云电脑').first();
