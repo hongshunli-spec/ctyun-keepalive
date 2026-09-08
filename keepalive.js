@@ -97,12 +97,17 @@ async function simulateActivity(page) {
         await page.waitForTimeout(1500);
       }
 
-      // 再次点击登录（有些情况下需要点两次）
-      const btn2 = page.locator('button.btn-submit:visible');
-      if (await btn2.count() > 0) {
-        await btn2.first().click();
+      // 再次点击登录（有些情况下需要点两次），但要等按钮恢复可用（不 loading）
+      try {
+        await page.waitForSelector('button.btn-submit:visible:not(.is-loading)', { timeout: 20000 });
+        const btn2 = page.locator('button.btn-submit:visible');
+        if (await btn2.count() > 0) {
+          await btn2.first().click();
+          await page.waitForTimeout(6000);
+        }
+      } catch (e) {
+        log('第二次点击跳过（按钮loading未恢复或已跳转）: ' + (e && e.message));
       }
-      await page.waitForTimeout(6000);
 
       log('登录操作完成');
     } else {
